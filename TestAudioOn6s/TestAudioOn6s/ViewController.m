@@ -77,6 +77,15 @@
     [[AVAudioSession sharedInstance] setActive:YES error:&error];
 }
 
++(void)requestAudioSession
+{
+    NSError *error;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:&error];
+    [[AVAudioSession sharedInstance] setMode:AVAudioSessionModeVoiceChat error:&error];
+    
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+}
+
 +(void)stopAudioSession
 {
     [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
@@ -84,6 +93,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     // Do any additional setup after loading the view, typically from a nib.
     self.audioBufferDuration = 0.02;
     self.audioSampleRate = 48000;
@@ -91,6 +101,8 @@
 
     [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
     self.consoleLog.editable = NO;
+    
+    [ViewController requestAudioSession];
 }
 
 - (IBAction)togglePlayPause:(id)sender {
@@ -107,10 +119,18 @@
     self.consoleLog.text = @"";
 }
 
+-(void)ensureAudioSessionAreOpen
+{
+    NSError *error;
+    [[AVAudioSession sharedInstance] setActive:NO error:&error];
+    [ViewController requestAudioSessionWithOption:self.audioBufferDuration sampleRate:self.audioSampleRate];
+}
+
 -(void)play
 {
     [self clear:nil];
-    [ViewController requestAudioSessionWithOption:self.audioBufferDuration sampleRate:self.audioSampleRate];
+
+    [self ensureAudioSessionAreOpen];
     self.audioUnit = [IosAudioController graphControllerWithDataSource:self audioBasicStreamFormat:[ViewController stereoFloatInterleavedFormatWithSampleRate:self.audioSampleRate] micrcophoneFormat:[ViewController monoFloatFormatWithSampleRate:self.audioSampleRate]];
     
     self.outputBuffer = malloc(sizeof(TPCircularBuffer));
@@ -128,16 +148,18 @@
     [self.audioUnit stop];
     self.audioUnit = nil;
     
-    if (_outputBuffer) {
-        TPCircularBufferCleanup(_outputBuffer);
-        free(_outputBuffer);
-    }
-    
     [ViewController stopAudioSession];
     
-    if ([self.playTimer isValid]) {
-        [self.playTimer invalidate];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.playTimer isValid]) {
+            [self.playTimer invalidate];
+        }
+        if (_outputBuffer) {
+            TPCircularBufferCleanup(_outputBuffer);
+            free(_outputBuffer);
+            _outputBuffer = NULL;
+        }
+    });
 }
 
 -(void)readBuffer:(id)timer
