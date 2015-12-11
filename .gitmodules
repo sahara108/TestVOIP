@@ -1,0 +1,6 @@
+[submodule "vendor/TheAmazingAudioEngine"]
+	path = vendor/TheAmazingAudioEngine
+	url = https://github.com/TheAmazingAudioEngine/TheAmazingAudioEngine
+[submodule "vendor/TPCircularBuffer"]
+	path = vendor/TPCircularBuffer
+	url = https://github.com/michaeltyson/TPCircularBuffer
