@@ -14,42 +14,10 @@
 		ABD3DA3F1C1A71FD007151B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD3DA3E1C1A71FD007151B4 /* Assets.xcassets */; };
 		ABD3DA421C1A71FD007151B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABD3DA401C1A71FD007151B4 /* LaunchScreen.storyboard */; };
 		ABD3DA4B1C1A7290007151B4 /* IosAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD3DA4A1C1A7290007151B4 /* IosAudioController.m */; };
-		ABD3DA5A1C1A72D1007151B4 /* libTheAmazingAudioEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD3DA531C1A72A6007151B4 /* libTheAmazingAudioEngine.a */; };
 		ABD3DA5D1C1A7343007151B4 /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = ABD3DA5B1C1A7343007151B4 /* TPCircularBuffer.c */; };
 		ABD3DA641C1A7C2B007151B4 /* EZAudioDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD3DA611C1A7C2B007151B4 /* EZAudioDevice.m */; };
 		ABD3DA651C1A7C2B007151B4 /* EZAudioUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD3DA631C1A7C2B007151B4 /* EZAudioUtilities.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		ABD3DA521C1A72A6007151B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4C215CEC1523A7D500D36CAD;
-			remoteInfo = TheAmazingAudioEngine;
-		};
-		ABD3DA541C1A72A6007151B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7A5687101B54610900243427;
-			remoteInfo = "TheAmazingAudioEngine OS X";
-		};
-		ABD3DA561C1A72A6007151B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 17BB5B401BECD101007A2892;
-			remoteInfo = "TheAmazingAudioEngine tvOS";
-		};
-		ABD3DA581C1A72C9007151B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C215CEB1523A7D500D36CAD;
-			remoteInfo = TheAmazingAudioEngine;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		ABD3DA2F1C1A71FD007151B4 /* TestAudioOn6s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAudioOn6s.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +32,6 @@
 		ABD3DA431C1A71FD007151B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3DA491C1A7290007151B4 /* IosAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosAudioController.h; sourceTree = "<group>"; };
 		ABD3DA4A1C1A7290007151B4 /* IosAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IosAudioController.m; sourceTree = "<group>"; };
-		ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TheAmazingAudioEngine.xcodeproj; path = ../vendor/TheAmazingAudioEngine/TheAmazingAudioEngine.xcodeproj; sourceTree = "<group>"; };
 		ABD3DA5B1C1A7343007151B4 /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TPCircularBuffer.c; path = ../../vendor/TPCircularBuffer/TPCircularBuffer.c; sourceTree = "<group>"; };
 		ABD3DA5C1C1A7343007151B4 /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPCircularBuffer.h; path = ../../vendor/TPCircularBuffer/TPCircularBuffer.h; sourceTree = "<group>"; };
 		ABD3DA601C1A7C2B007151B4 /* EZAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZAudioDevice.h; sourceTree = "<group>"; };
@@ -78,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABD3DA5A1C1A72D1007151B4 /* libTheAmazingAudioEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +54,6 @@
 		ABD3DA261C1A71FC007151B4 = {
 			isa = PBXGroup;
 			children = (
-				ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */,
 				ABD3DA311C1A71FD007151B4 /* TestAudioOn6s */,
 				ABD3DA301C1A71FD007151B4 /* Products */,
 			);
@@ -131,16 +96,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		ABD3DA4D1C1A72A5007151B4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ABD3DA531C1A72A6007151B4 /* libTheAmazingAudioEngine.a */,
-				ABD3DA551C1A72A6007151B4 /* libTheAmazingAudioEngine OS X.a */,
-				ABD3DA571C1A72A6007151B4 /* libTheAmazingAudioEngine tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		ABD3DA5F1C1A7C2B007151B4 /* EZAudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +121,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				ABD3DA591C1A72C9007151B4 /* PBXTargetDependency */,
 			);
 			name = TestAudioOn6s;
 			productName = TestAudioOn6s;
@@ -198,42 +152,12 @@
 			mainGroup = ABD3DA261C1A71FC007151B4;
 			productRefGroup = ABD3DA301C1A71FD007151B4 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = ABD3DA4D1C1A72A5007151B4 /* Products */;
-					ProjectRef = ABD3DA4C1C1A72A5007151B4 /* TheAmazingAudioEngine.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				ABD3DA2E1C1A71FD007151B4 /* TestAudioOn6s */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		ABD3DA531C1A72A6007151B4 /* libTheAmazingAudioEngine.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTheAmazingAudioEngine.a;
-			remoteRef = ABD3DA521C1A72A6007151B4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		ABD3DA551C1A72A6007151B4 /* libTheAmazingAudioEngine OS X.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libTheAmazingAudioEngine OS X.a";
-			remoteRef = ABD3DA541C1A72A6007151B4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		ABD3DA571C1A72A6007151B4 /* libTheAmazingAudioEngine tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libTheAmazingAudioEngine tvOS.a";
-			remoteRef = ABD3DA561C1A72A6007151B4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		ABD3DA2D1C1A71FD007151B4 /* Resources */ = {
@@ -264,14 +188,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		ABD3DA591C1A72C9007151B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TheAmazingAudioEngine;
-			targetProxy = ABD3DA581C1A72C9007151B4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		ABD3DA3B1C1A71FD007151B4 /* Main.storyboard */ = {
@@ -377,7 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../vendor/TheAmazingAudioEngine\"/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TestAudioOn6s/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -390,7 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../vendor/TheAmazingAudioEngine\"/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TestAudioOn6s/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
