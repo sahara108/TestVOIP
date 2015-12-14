@@ -10,6 +10,8 @@
 #import "IosAudioController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "TPCircularBuffer.h"
+#import "SystemSoundHelper.h"
+#import "TestAudioOn6s-Swift.h"
 
 @interface ViewController ()<IosAudioControllerDatasource>
 
@@ -23,6 +25,8 @@
 @property (nonatomic, getter=isPlaying) BOOL play;
 
 @property (nonatomic, strong) NSTimer *playTimer;
+
+@property (nonatomic, strong) TestSwiftObject *swiftObject;
 
 @end
 
@@ -103,16 +107,36 @@
     self.consoleLog.editable = NO;
     
     [ViewController requestAudioSession];
+    
+    self.swiftObject = [TestSwiftObject new];
+}
+
+-(void)playSound:(NSString*)name type:(NSString*)type loop:(BOOL)loop viberation:(BOOL)viberation
+{
+    [[SystemSoundHelper shareInstance] playSoundWithName:name type:type loop:loop withViberation:viberation];
 }
 
 - (IBAction)togglePlayPause:(id)sender {
     self.play = !self.play;
     if (self.play) {
-        [self play];
-        [self.controlButton setTitle:@"Stop" forState:UIControlStateNormal];
+        self.controlButton.enabled = NO;
+        [ViewController requestAudioSession];
+//        [self playSound:@"calling_01" type:@"mp3" loop:true viberation:false];
+        [self.swiftObject playSound:@"calling_01" type:@"mp3" loop:true viberation:false];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self playSound:@"cnnection_secured" type:@"mp3" loop:false viberation:false];
+            [self.swiftObject playSound:@"cnnection_secured" type:@"mp3" loop:false viberation:false];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self play];
+                [self.controlButton setTitle:@"Stop" forState:UIControlStateNormal];
+                self.controlButton.enabled = YES;
+            });
+        });
     }else {
         [self stop];
         [self.controlButton setTitle:@"Start" forState:UIControlStateNormal];
+//        [self playSound:@"end_call_01" type:@"mp3" loop:false viberation:false];
+        [self.swiftObject playSound:@"end_call_01" type:@"mp3" loop:false viberation:false];
     }
 }
 - (IBAction)clear:(id)sender {
@@ -129,17 +153,24 @@
 -(void)play
 {
     [self clear:nil];
+    
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        if (granted) {
+            [self ensureAudioSessionAreOpen];
+            self.audioUnit = [IosAudioController graphControllerWithDataSource:self audioBasicStreamFormat:[ViewController stereoFloatInterleavedFormatWithSampleRate:self.audioSampleRate] micrcophoneFormat:[ViewController monoFloatFormatWithSampleRate:self.audioSampleRate]];
+            
+            self.outputBuffer = malloc(sizeof(TPCircularBuffer));
+            TPCircularBufferInit(_outputBuffer, 9600 * sizeof(float) * 1);
+            
+            self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(readBuffer:) userInfo:nil repeats:YES];
+            [self.playTimer fire];
+            
+            [self.audioUnit start];
+        }
+        
+    }];
 
-    [self ensureAudioSessionAreOpen];
-    self.audioUnit = [IosAudioController graphControllerWithDataSource:self audioBasicStreamFormat:[ViewController stereoFloatInterleavedFormatWithSampleRate:self.audioSampleRate] micrcophoneFormat:[ViewController monoFloatFormatWithSampleRate:self.audioSampleRate]];
     
-    self.outputBuffer = malloc(sizeof(TPCircularBuffer));
-    TPCircularBufferInit(_outputBuffer, 9600 * sizeof(float) * 1);
-    
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(readBuffer:) userInfo:nil repeats:YES];
-    [self.playTimer fire];
-    
-    [self.audioUnit start];
 }
 
 -(void)stop
@@ -150,16 +181,14 @@
     
     [ViewController stopAudioSession];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self.playTimer isValid]) {
-            [self.playTimer invalidate];
-        }
-        if (_outputBuffer) {
-            TPCircularBufferCleanup(_outputBuffer);
-            free(_outputBuffer);
-            _outputBuffer = NULL;
-        }
-    });
+    if ([self.playTimer isValid]) {
+        [self.playTimer invalidate];
+    }
+    if (_outputBuffer) {
+        TPCircularBufferCleanup(_outputBuffer);
+        free(_outputBuffer);
+        _outputBuffer = NULL;
+    }
 }
 
 -(void)readBuffer:(id)timer

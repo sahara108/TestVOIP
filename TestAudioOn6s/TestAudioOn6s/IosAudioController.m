@@ -294,6 +294,7 @@ void MyAudioUnitPropertyListenerProc(void *inRefCon, AudioUnit ci, AudioUnitProp
 - (void) start {
 	OSStatus status = AudioOutputUnitStart(_audioUnit);
     
+    // This is my test code try to kick speaker and microphone on. Only affect speaker.
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        NSArray *inputDevices = [EZAudioDevice inputDevices];
 //        [self setMicrophoneDevice:[inputDevices lastObject]];
